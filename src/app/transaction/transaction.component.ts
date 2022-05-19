@@ -27,7 +27,7 @@ export class TransactionComponent implements OnInit {
   banks = [];
   // categorytitles=[];
   categorynamesoriginal = [];
-  selectedBank = "";
+  selectedBank = { bank: "", code: "" };
   categorynames = [];
   categorynamefront = [];
   incomecategories = [];
@@ -77,8 +77,12 @@ export class TransactionComponent implements OnInit {
         //   this.categorytitles.push(element.titlecategory);
         // }
       });
-      this.banks.push(...data.filter((el) => el.titlecategory == "Bank")[0].category)
-      this.selectedBank = this.banks[0];
+      let banks = data.filter((el) => el.titlecategory == "Bank")[0]?.category
+      if (banks && banks.length) {
+        this.banks.push(...banks)
+        this.selectedBank = this.banks[0]
+      }
+
     });
     // this.api.getExpenceCategories().subscribe((data:any)=>{
     //   data.forEach(element => {
@@ -299,14 +303,9 @@ export class TransactionComponent implements OnInit {
   savePayment(i: number) {
     this.email = localStorage.getItem("uEmail");
     var amount = 0;
-    if (!this.payments[i].paidin && !this.payments[i].paidout) {
-      window.alert("Enter Amount");
-      return;
-    }
-    if (!this.payments[i].category) {
-      window.alert("Enter Category");
-      return;
-    }
+    if (!this.payments[i].paidin && !this.payments[i].paidout) return window.alert("Enter Amount");
+    if (!this.payments[i].category) return window.alert("Enter Category");
+    if (!this.selectedBank.bank.length) return alert("Select Bank");
     //update in income table
     this.api.createNextCashAccountNumber(this.email).subscribe((data: any) => {
       this.payments[i].id = data.msg;
@@ -314,7 +313,6 @@ export class TransactionComponent implements OnInit {
       if (this.payments[i].paidin) {
         amount = this.payments[i].paidin;
         this.payments[i].amount = -1 * this.payments[i].paidin;
-        Object.assign(this.payments[i], this.selectedBank)
         this.api
           .addCashAccount(this.email, this.payments[i])
           .subscribe((data: any) => {
@@ -328,7 +326,6 @@ export class TransactionComponent implements OnInit {
       } else if (this.payments[i].paidout) {
         amount = -1 * this.payments[i].paidout;
         this.payments[i].amount = this.payments[i].paidout;
-        Object.assign(this.payments[i], this.selectedBank)
         this.api
           .addCashAccount(this.email, this.payments[i])
           .subscribe((data: any) => {
@@ -342,12 +339,14 @@ export class TransactionComponent implements OnInit {
       }
 
       //adding to bankStatement
+
       this.api
         .addbankstatement(
           this.payments[i].date,
           amount,
           this.payments[i].description,
-          this.email
+          this.email,
+          this.selectedBank
         )
         .subscribe((data: any) => {
           window.alert("Saved Successfully");
