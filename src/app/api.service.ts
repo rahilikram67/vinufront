@@ -36,7 +36,7 @@ export class ApiService {
   }
   insertNewCategory(titlecategory: string, category: string, whose: string) {
 
-    return this.http.post("http://localhost:3000/insertNewCategory", { "titlecategory": titlecategory, "category": category, "whose": whose });
+    return this.http.post("http://localhost:3000/insertNewCategory", { "titlecategory": titlecategory, "category": category, whose });
   }
   insertNewExpenceCategory(category: string) {
     return this.http.post("http://localhost:3000/insertNewExpenceCategory", { "category": category });
@@ -86,65 +86,65 @@ export class ApiService {
   addCustomerDetils(name: string, email: string, contactno: string, address: string, whose: string) {
     //titlecategory:string,category:string,whose:string
 
-    let call1 = this.http.post("http://localhost:3000/insertNewCategory", { "titlecategory": "Customer", "category": name, "whose": whose });
-    let call2 = this.http.post("http://localhost:3000/addCustomerDetils", { "name": name, "email": email, "contactno": contactno, "address": address, "whose": whose });
+    let call1 = this.http.post("http://localhost:3000/insertNewCategory", { "titlecategory": "Customer", "category": name, whose });
+    let call2 = this.http.post("http://localhost:3000/addCustomerDetils", { "name": name, "email": email, "contactno": contactno, "address": address, whose });
     return forkJoin([call1, call2]);
 
   }
   addSupplierDetils(name: string, email: string, contactno: string, address: string, whose: string) {
-    let call1 = this.http.post("http://localhost:3000/insertNewCategory", { "titlecategory": "Supplier", "category": name, "whose": whose });
-    let call2 = this.http.post("http://localhost:3000/addSupplierDetils", { "name": name, "email": email, "contactno": contactno, "address": address, "whose": whose });
+    let call1 = this.http.post("http://localhost:3000/insertNewCategory", { "titlecategory": "Supplier", "category": name, whose });
+    let call2 = this.http.post("http://localhost:3000/addSupplierDetils", { "name": name, "email": email, "contactno": contactno, "address": address, whose });
     return forkJoin([call1, call2]);
   }
   addCustomerInvoice(date: string, duedate: string, invoiceid: string, reference: string, products: any[], totalamount: number, additionaldetails: string, whose: string, customerid: string, customername: string) {
 
-    return this.http.post("http://localhost:3000/addCustomerInvoice", { "date": date, "duedate": duedate, "invoiceid": invoiceid, "reference": reference, "products": products, "totalamount": totalamount, "additionaldetails": additionaldetails, "whose": whose, "customerid": customerid, "customername": customername });
+    return this.http.post("http://localhost:3000/addCustomerInvoice", { "date": date, "duedate": duedate, "invoiceid": invoiceid, "reference": reference, "products": products, "totalamount": totalamount, "additionaldetails": additionaldetails, whose, "customerid": customerid, "customername": customername });
   }
   insertNewBank(bank: string, code: string, whose: string) {
     return this.http.post("http://localhost:3000/insertNewBank", { bank, code, whose });
   }
   addSupplierInvoice(date: string, duedate: string, invoiceid: string, reference: string, products: any[], totalamount: number, additionaldetails: string, whose: string, customerid: string, customername: string) {
-    return this.http.post("http://localhost:3000/addSupplierInvoice", { "date": date, "duedate": duedate, "invoiceid": invoiceid, "reference": reference, "products": products, "totalamount": totalamount, "additionaldetails": additionaldetails, "whose": whose, "customerid": customerid, "customername": customername });
+    return this.http.post("http://localhost:3000/addSupplierInvoice", { "date": date, "duedate": duedate, "invoiceid": invoiceid, "reference": reference, "products": products, "totalamount": totalamount, "additionaldetails": additionaldetails, whose, "customerid": customerid, "customername": customername });
   }
   addCustomerInvoiceDraft(date: string, duedate: string, invoiceid: string, reference: string, products: any[], totalamount: number, additionaldetails: string, whose: string, customerid: string, customername: string) {
-    return this.http.post("http://localhost:3000/addCustomerInvoiceDraft", { "date": date, "duedate": duedate, "invoiceid": invoiceid, "reference": reference, "products": products, "totalamount": totalamount, "additionaldetails": additionaldetails, "whose": whose, "customerid": customerid, "customername": customername });
+    return this.http.post("http://localhost:3000/addCustomerInvoiceDraft", { "date": date, "duedate": duedate, "invoiceid": invoiceid, "reference": reference, "products": products, "totalamount": totalamount, "additionaldetails": additionaldetails, whose, "customerid": customerid, "customername": customername });
   }
   addSupplierInvoiceDraft(date: string, duedate: string, invoiceid: string, reference: string, products: any[], totalamount: number, additionaldetails: string, whose: string, customerid: string, customername: string) {
-    return this.http.post("http://localhost:3000/addSupplierInvoiceDraft", { "date": date, "duedate": duedate, "invoiceid": invoiceid, "reference": reference, "products": products, "totalamount": totalamount, "additionaldetails": additionaldetails, "whose": whose, "customerid": customerid, "customername": customername });
+    return this.http.post("http://localhost:3000/addSupplierInvoiceDraft", { "date": date, "duedate": duedate, "invoiceid": invoiceid, "reference": reference, "products": products, "totalamount": totalamount, "additionaldetails": additionaldetails, whose, "customerid": customerid, "customername": customername });
   }
   createNextCustomerInvoiceNumber(whose: string) {
-    return this.http.post("http://localhost:3000/createNextCustomerInvoiceNumber", { "whose": whose });
+    return this.http.post("http://localhost:3000/createNextCustomerInvoiceNumber", { whose });
   }
   getAllCustomers(whose: string) {
-    return this.http.post("http://localhost:3000/getAllCustomers", { "whose": whose });
+    return this.http.post("http://localhost:3000/getAllCustomers", { whose });
   }
   getAllSuppliers(whose: string) {
-    return this.http.post("http://localhost:3000/getAllSuppliers", { "whose": whose });
+    return this.http.post("http://localhost:3000/getAllSuppliers", { whose });
   }
   getAllCustomerInvoioce(whose: string) {
-    return this.http.post("http://localhost:3000/getAllCustomerInvoioce", { "whose": whose });
+    return this.http.post("http://localhost:3000/getAllCustomerInvoioce", { whose });
   }
   getAllCustomerInvoioceUnallocated(whose: string) {
-    return this.http.post("http://localhost:3000/getAllCustomerInvoioceUnallocated", { "whose": whose });
+    return this.http.post("http://localhost:3000/getAllCustomerInvoioceUnallocated", { whose });
   }
   getAllSupplierNegativeInvoioceUnallocated(whose: string) {
-    return this.http.post("http://localhost:3000/getAllSupplierNegativeInvoioceUnallocated", { "whose": whose });
+    return this.http.post("http://localhost:3000/getAllSupplierNegativeInvoioceUnallocated", { whose });
   }
   getAllSupplierInvoioceUnallocated(whose: string) {
-    return this.http.post("http://localhost:3000/getAllSupplierInvoioceUnallocated", { "whose": whose });
+    return this.http.post("http://localhost:3000/getAllSupplierInvoioceUnallocated", { whose });
   }
   getAllCustomerNegativeInvoioceUnallocated(whose: string) {
-    return this.http.post("http://localhost:3000/getAllCustomerNegativeInvoioceUnallocated", { "whose": whose });
+    return this.http.post("http://localhost:3000/getAllCustomerNegativeInvoioceUnallocated", { whose });
   }
   getAllSupplierInvoioce(whose: string) {
-    return this.http.post("http://localhost:3000/getAllSupplierInvoioce", { "whose": whose });
+    return this.http.post("http://localhost:3000/getAllSupplierInvoioce", { whose });
   }
   getAllCustomerDraftInvoioce(whose: string) {
-    return this.http.post("http://localhost:3000/getAllCustomerDraftInvoioce", { "whose": whose });
+    return this.http.post("http://localhost:3000/getAllCustomerDraftInvoioce", { whose });
   }
 
   getAllSupplierDraftInvoioce(whose: string) {
-    return this.http.post("http://localhost:3000/getAllSupplierDraftInvoioce", { "whose": whose });
+    return this.http.post("http://localhost:3000/getAllSupplierDraftInvoioce", { whose });
   }
 
   getCustomerNameFromId(id: string) {
@@ -203,16 +203,16 @@ export class ApiService {
     return this.http.post("http://localhost:3000/getSupplierDetails", { "id": id });
   }
   getAllInvoioceOfACustomer(whose: string, customerid: string) {
-    return this.http.post("http://localhost:3000/getAllInvoioceOfACustomer", { "whose": whose, "customerid": customerid });
+    return this.http.post("http://localhost:3000/getAllInvoioceOfACustomer", { whose, "customerid": customerid });
   }
   getAllInvoioceOfASupplier(whose: string, customerid: string) {
-    return this.http.post("http://localhost:3000/getAllInvoioceOfASupplier", { "whose": whose, "customerid": customerid });
+    return this.http.post("http://localhost:3000/getAllInvoioceOfASupplier", { whose, "customerid": customerid });
   }
   getAllInvoioceOfACustomerDraft(whose: string, customerid: string) {
-    return this.http.post("http://localhost:3000/getAllInvoioceOfACustomerDraft", { "whose": whose, "customerid": customerid });
+    return this.http.post("http://localhost:3000/getAllInvoioceOfACustomerDraft", { whose, "customerid": customerid });
   }
   getAllInvoioceOfASupplierDraft(whose: string, customerid: string) {
-    return this.http.post("http://localhost:3000/getAllInvoioceOfASupplierDraft", { "whose": whose, "customerid": customerid });
+    return this.http.post("http://localhost:3000/getAllInvoioceOfASupplierDraft", { whose, "customerid": customerid });
   }
   updateCustomer(id: string, userFullName: string, userEmailId: string, userContactNo: string, userAddress: string) {
     return this.http.post("http://localhost:3000/updateCustomer", { "id": id, "userFullName": userFullName, "userEmailId": userEmailId, "userContactNo": userContactNo, "userAddress": userAddress });
@@ -227,20 +227,20 @@ export class ApiService {
     return this.http.post("http://localhost:3000/deleteSupplier", { "id": id });
   }
   allocateToCustomerInvoice(whose: string, id: string, date: string, totalamount: number, allocatedAmount: number) {
-    return this.http.post("http://localhost:3000/allocateToCustomerInvoice", { "whose": whose, "id": id, "date": date, "totalamount": totalamount, "allocatedAmount": allocatedAmount });
+    return this.http.post("http://localhost:3000/allocateToCustomerInvoice", { whose, id, date, totalamount, allocatedAmount });
   }
   allocateToSupplierInvoice(whose: string, id: string, date: string, totalamount: number, allocatedAmount: number) {
-    return this.http.post("http://localhost:3000/allocateToSupplierInvoice", { "whose": whose, "id": id, "date": date, "totalamount": totalamount, "allocatedAmount": allocatedAmount });
+    return this.http.post("http://localhost:3000/allocateToSupplierInvoice", { whose, "id": id, "date": date, "totalamount": totalamount, "allocatedAmount": allocatedAmount });
   }
   createNextCashAccountNumber(whose: string) {
-    return this.http.post("http://localhost:3000/createNextCashAccountNumber", { "whose": whose });
+    return this.http.post("http://localhost:3000/createNextCashAccountNumber", { whose });
   }
   addCashAccount(whose: string, payment: any) {
-    return this.http.post("http://localhost:3000/addCashAccount", { "whose": whose, "payment": payment });
+    return this.http.post("http://localhost:3000/addCashAccount", { whose, "payment": payment });
   }
 
   addCashAccountFromAdjusted(whose: string, adjustedamount: any, date: string, cashaccountid: string) {
-    return this.http.post("http://localhost:3000/addCashAccountFromAdjusted", { "whose": whose, "adjustedamount": adjustedamount, "date": date, "cashaccountid": cashaccountid });
+    return this.http.post("http://localhost:3000/addCashAccountFromAdjusted", { whose, "adjustedamount": adjustedamount, "date": date, "cashaccountid": cashaccountid });
   }
 
   getAllCashAccounts(email: string) {
@@ -256,13 +256,13 @@ export class ApiService {
     return this.http.post("http://localhost:3000/getAllBankStatements", { "email": email });
   }
   createNextJournalNumber(whose: string) {
-    return this.http.post("http://localhost:3000/createNextJournalNumber", { "whose": whose });
+    return this.http.post("http://localhost:3000/createNextJournalNumber", { whose });
   }
   addNewJournal(whose: string, narration: string, date: string, jno: string, tax: string, journalentries: any) {
-    return this.http.post("http://localhost:3000/addNewJournal", { "whose": whose, "narration": narration, "date": date, "jno": jno, "tax": tax, "journalentries": journalentries });
+    return this.http.post("http://localhost:3000/addNewJournal", { whose, "narration": narration, "date": date, "jno": jno, "tax": tax, "journalentries": journalentries });
   }
   getAllJournals(whose: string) {
-    return this.http.post("http://localhost:3000/getAllJournals", { "whose": whose });
+    return this.http.post("http://localhost:3000/getAllJournals", { whose });
   }
   getJournalFromID(id: string) {
     return this.http.post("http://localhost:3000/getJournalFromID", { "id": id });

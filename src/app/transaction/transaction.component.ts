@@ -700,6 +700,7 @@ export class TransactionComponent implements OnInit {
   }
 
   async allocateAmount(date222, desc, i) {
+    if(!this.selectedBank.bank.length) return alert("select a bank first")
     var whose = localStorage.getItem("uEmail");
     var amount = 0;
     var checkpaidin = 0; //checking  paidin or paidout
@@ -804,9 +805,9 @@ export class TransactionComponent implements OnInit {
 
     //adding to bankStatement
     this.api
-      .addbankstatement(date222, amount, desc, whose)
+      .addbankstatement(date222, amount, desc, whose,this.selectedBank)
       .subscribe((data: any) => {
-        // window.alert("Saved Successfully");
+        window.alert("Saved Successfully");
         this.removePayment(i);
       });
 

@@ -206,7 +206,7 @@
                                                 <th style="text-align: center;">Amount</th>
                                             </tr>
                                             <tbody *ngFor="let displayincome of displayincomes ; let i = index;"
-                                                [ngClass]="displayincome.description?'d-none':''">
+                                                [ngClass]="false?'d-none':''">
                                                 <tr>
                                                     <!-- <td> {{displayincome.category}}</td>                                                    -->
                                                     <td><input name="id_{{i}}" class="form-control"
